@@ -5,7 +5,7 @@ This project showcases my profile, skills, education, and sample work as a Pytho
 
 ## 🔗 Live Demo
 
-👉 [View Portfolio Live](#)
+👉 [View Portfolio Live](https://thetorangi.github.io/portfolio/)
 
 ---
 
