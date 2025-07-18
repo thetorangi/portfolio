@@ -1,141 +1,193 @@
 'use strict';
 
-// ==========================
-// Element Toggle Function
-// ==========================
-const elementToggleFunc = function (elem) {
-  elem.classList.toggle("active");
-};
+// element toggle function
+const elementToggleFunc = function (elem) { elem.classList.toggle("active"); }
 
-// ==========================
-// Sidebar Toggle (Mobile)
-// ==========================
+// sidebar variables
 const sidebar = document.querySelector("[data-sidebar]");
 const sidebarBtn = document.querySelector("[data-sidebar-btn]");
 
-sidebarBtn.addEventListener("click", () => elementToggleFunc(sidebar));
+// sidebar toggle functionality for mobile
+sidebarBtn.addEventListener("click", function () { elementToggleFunc(sidebar); });
 
-// ==========================
-// Testimonials Modal Logic
-// ==========================
+
+// testimonials variables
 const testimonialsItem = document.querySelectorAll("[data-testimonials-item]");
 const modalContainer = document.querySelector("[data-modal-container]");
 const modalCloseBtn = document.querySelector("[data-modal-close-btn]");
 const overlay = document.querySelector("[data-overlay]");
+
+// modal variable
 const modalImg = document.querySelector("[data-modal-img]");
 const modalTitle = document.querySelector("[data-modal-title]");
 const modalText = document.querySelector("[data-modal-text]");
 
-const testimonialsModalFunc = () => {
+// modal toggle function
+const testimonialsModalFunc = function () {
   modalContainer.classList.toggle("active");
   overlay.classList.toggle("active");
-};
+}
 
-testimonialsItem.forEach(item => {
-  item.addEventListener("click", function () {
+// add click event to all modal items
+for (let i = 0; i < testimonialsItem.length; i++) {
+
+  testimonialsItem[i].addEventListener("click", function () {
+
     modalImg.src = this.querySelector("[data-testimonials-avatar]").src;
     modalImg.alt = this.querySelector("[data-testimonials-avatar]").alt;
     modalTitle.innerHTML = this.querySelector("[data-testimonials-title]").innerHTML;
     modalText.innerHTML = this.querySelector("[data-testimonials-text]").innerHTML;
-    testimonialsModalFunc();
-  });
-});
 
+    testimonialsModalFunc();
+
+  });
+
+}
+
+// add click event to modal close button
 modalCloseBtn.addEventListener("click", testimonialsModalFunc);
 overlay.addEventListener("click", testimonialsModalFunc);
 
-// ==========================
-// Custom Select (Portfolio Filter)
-// ==========================
+
+// custom select variables
 const select = document.querySelector("[data-select]");
 const selectItems = document.querySelectorAll("[data-select-item]");
-const selectValue = document.querySelector("[data-select-value]");
+const selectValue = document.querySelector("[data-selecct-value]");
 const filterBtn = document.querySelectorAll("[data-filter-btn]");
-const filterItems = document.querySelectorAll("[data-filter-item]");
 
-select.addEventListener("click", () => elementToggleFunc(select));
+select.addEventListener("click", function () { elementToggleFunc(this); });
 
-selectItems.forEach(item => {
-  item.addEventListener("click", function () {
-    const selectedValue = this.innerText.toLowerCase();
+// add event in all select items
+for (let i = 0; i < selectItems.length; i++) {
+  selectItems[i].addEventListener("click", function () {
+
+    let selectedValue = this.innerText.toLowerCase();
     selectValue.innerText = this.innerText;
     elementToggleFunc(select);
     filterFunc(selectedValue);
+
   });
-});
+}
+
+// filter variables
+const filterItems = document.querySelectorAll("[data-filter-item]");
 
 const filterFunc = function (selectedValue) {
-  filterItems.forEach(item => {
-    const itemCategory = item.dataset.category;
-    if (selectedValue === "all" || selectedValue === itemCategory) {
-      item.classList.add("active");
-    } else {
-      item.classList.remove("active");
-    }
-  });
-};
 
+  for (let i = 0; i < filterItems.length; i++) {
+
+    if (selectedValue === "all") {
+      filterItems[i].classList.add("active");
+    } else if (selectedValue === filterItems[i].dataset.category) {
+      filterItems[i].classList.add("active");
+    } else {
+      filterItems[i].classList.remove("active");
+    }
+
+  }
+
+}
+
+// add event in all filter button items for large screen
 let lastClickedBtn = filterBtn[0];
-filterBtn.forEach(btn => {
-  btn.addEventListener("click", function () {
-    const selectedValue = this.innerText.toLowerCase();
+
+for (let i = 0; i < filterBtn.length; i++) {
+
+  filterBtn[i].addEventListener("click", function () {
+
+    let selectedValue = this.innerText.toLowerCase();
     selectValue.innerText = this.innerText;
     filterFunc(selectedValue);
 
     lastClickedBtn.classList.remove("active");
     this.classList.add("active");
     lastClickedBtn = this;
-  });
-});
 
-// ==========================
-// Contact Form Validation
-// ==========================
+  });
+
+}
+
+
+// contact form variables
 const form = document.querySelector("[data-form]");
 const formInputs = document.querySelectorAll("[data-form-input]");
 const formBtn = document.querySelector("[data-form-btn]");
 
-formInputs.forEach(input => {
-  input.addEventListener("input", () => {
-    form.checkValidity()
-      ? formBtn.removeAttribute("disabled")
-      : formBtn.setAttribute("disabled", "");
-  });
-});
+// add event to all form input field
+for (let i = 0; i < formInputs.length; i++) {
+  formInputs[i].addEventListener("input", function () {
 
-// ==========================
-// Page Navigation
-// ==========================
+    // check form validation
+    if (form.checkValidity()) {
+      formBtn.removeAttribute("disabled");
+    } else {
+      formBtn.setAttribute("disabled", "");
+    }
+
+  });
+}
+
+
+// page navigation variables
 const navigationLinks = document.querySelectorAll("[data-nav-link]");
 const pages = document.querySelectorAll("[data-page]");
 
-navigationLinks.forEach((link, index) => {
-  link.addEventListener("click", function () {
-    pages.forEach((page, idx) => {
-      const isActive = idx === index;
-      page.classList.toggle("active", isActive);
-      navigationLinks[idx].classList.toggle("active", isActive);
-    });
-    window.scrollTo(0, 0);
+// add event to all nav link
+for (let i = 0; i < navigationLinks.length; i++) {
+  navigationLinks[i].addEventListener("click", function () {
+
+    for (let i = 0; i < pages.length; i++) {
+      if (this.innerHTML.toLowerCase() === pages[i].dataset.page) {
+        pages[i].classList.add("active");
+        navigationLinks[i].classList.add("active");
+        window.scrollTo(0, 0);
+      } else {
+        pages[i].classList.remove("active");
+        navigationLinks[i].classList.remove("active");
+      }
+    }
+
   });
-});
+}
 
-// ==========================
-// Dark/Light Theme Toggle
-// ==========================
-document.addEventListener("DOMContentLoaded", () => {
-  const themeToggle = document.getElementById("themeToggle");
-  const htmlElement = document.documentElement;
+// Theme toggle functionality
+const themeToggleBtn = document.createElement('button');
+themeToggleBtn.classList.add('theme-toggle-btn');
+themeToggleBtn.setAttribute('aria-label', 'Toggle theme');
+document.body.appendChild(themeToggleBtn);
 
-  const savedTheme = localStorage.getItem("theme") || "light";
-  htmlElement.setAttribute("data-theme", savedTheme);
-  if (themeToggle) {
-    themeToggle.checked = savedTheme === "dark";
+const themeIcon = document.createElement('ion-icon');
+themeIcon.setAttribute('name', 'moon-outline');
+themeToggleBtn.appendChild(themeIcon);
 
-    themeToggle.addEventListener("change", () => {
-      const newTheme = themeToggle.checked ? "dark" : "light";
-      htmlElement.setAttribute("data-theme", newTheme);
-      localStorage.setItem("theme", newTheme);
-    });
+const currentTheme = localStorage.getItem('theme');
+
+const setTheme = (theme) => {
+  if (theme === 'light') {
+    document.body.classList.add('light-theme');
+    themeIcon.setAttribute('name', 'moon-outline');
+  } else {
+    document.body.classList.remove('light-theme');
+    themeIcon.setAttribute('name', 'sunny-outline');
+  }
+};
+
+// Set theme on initial load
+if (currentTheme) {
+  setTheme(currentTheme);
+} else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+  setTheme('light'); // Default to light if OS preference is light
+} else {
+  setTheme('dark'); // Default to dark otherwise
+}
+
+
+themeToggleBtn.addEventListener('click', () => {
+  if (document.body.classList.contains('light-theme')) {
+    localStorage.setItem('theme', 'dark');
+    setTheme('dark');
+  } else {
+    localStorage.setItem('theme', 'light');
+    setTheme('light');
   }
 });
