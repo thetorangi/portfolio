@@ -3,12 +3,6 @@
 \*-----------------------------------*/
 
 
-/**
- * copyright 2022 @codewithsadee
- */
-
-
-
 
 
 /*-----------------------------------*\
@@ -18,44 +12,42 @@
 :root {
 
   /**
-   * colors
+   * colors (Dark Theme)
    */
 
   /* gradient */
-
   --bg-gradient-onyx: linear-gradient(
-    to bottom right, 
-    hsl(240, 1%, 25%) 3%, 
+    to bottom right,
+    hsl(240, 1%, 25%) 3%,
     hsl(0, 0%, 19%) 97%
   );
   --bg-gradient-jet: linear-gradient(
-    to bottom right, 
-    hsla(240, 1%, 18%, 0.251) 0%, 
+    to bottom right,
+    hsla(240, 1%, 18%, 0.251) 0%,
     hsla(240, 2%, 11%, 0) 100%
   ), hsl(240, 2%, 13%);
   --bg-gradient-yellow-1: linear-gradient(
-    to bottom right, 
-    hsl(45, 100%, 71%) 0%, 
+    to bottom right,
+    hsl(45, 100%, 71%) 0%,
     hsla(36, 100%, 69%, 0) 50%
   );
   --bg-gradient-yellow-2: linear-gradient(
-    135deg, 
-    hsla(45, 100%, 71%, 0.251) 0%, 
+    135deg,
+    hsla(45, 100%, 71%, 0.251) 0%,
     hsla(35, 100%, 68%, 0) 59.86%
   ), hsl(240, 2%, 13%);
   --border-gradient-onyx: linear-gradient(
-    to bottom right, 
-    hsl(0, 0%, 25%) 0%, 
+    to bottom right,
+    hsl(0, 0%, 25%) 0%,
     hsla(0, 0%, 25%, 0) 50%
   );
   --text-gradient-yellow: linear-gradient(
-    to right, 
-    hsl(45, 100%, 72%), 
+    to right,
+    hsl(45, 100%, 72%),
     hsl(35, 100%, 68%)
   );
 
   /* solid */
-
   --jet: hsl(0, 0%, 22%);
   --onyx: hsl(240, 1%, 17%);
   --eerie-black-1: hsl(240, 2%, 13%);
@@ -95,7 +87,7 @@
   /**
    * shadow
    */
-  
+
   --shadow-1: -4px 8px 24px hsla(0, 0%, 0%, 0.25);
   --shadow-2: 0 16px 30px hsla(0, 0%, 0%, 0.25);
   --shadow-3: 0 16px 40px hsla(0, 0%, 0%, 0.25);
@@ -111,8 +103,58 @@
 
 }
 
+/* Light Theme Variables */
+body.light-theme {
+  --bg-gradient-onyx: linear-gradient(
+    to bottom right,
+    hsl(0, 0%, 95%) 3%,
+    hsl(0, 0%, 90%) 97%
+  );
+  --bg-gradient-jet: linear-gradient(
+    to bottom right,
+    hsla(0, 0%, 90%, 0.251) 0%,
+    hsla(0, 0%, 85%, 0) 100%
+  ), hsl(0, 0%, 88%);
+  --bg-gradient-yellow-1: linear-gradient(
+    to bottom right,
+    hsl(45, 100%, 71%) 0%,
+    hsla(36, 100%, 69%, 0) 50%
+  );
+  --bg-gradient-yellow-2: linear-gradient(
+    135deg,
+    hsla(45, 100%, 71%, 0.251) 0%,
+    hsla(35, 100%, 68%, 0) 59.86%
+  ), hsl(0, 0%, 88%);
+  --border-gradient-onyx: linear-gradient(
+    to bottom right,
+    hsl(0, 0%, 75%) 0%,
+    hsla(0, 0%, 75%, 0) 50%
+  );
+  --text-gradient-yellow: linear-gradient(
+    to right,
+    hsl(45, 100%, 72%),
+    hsl(35, 100%, 68%)
+  );
 
+  --jet: hsl(0, 0%, 78%);
+  --onyx: hsl(0, 0%, 83%);
+  --eerie-black-1: hsl(0, 0%, 88%);
+  --eerie-black-2: hsl(0, 0%, 90%);
+  --smoky-black: hsl(0, 0%, 95%); /* Changed to light background */
+  --white-1: hsl(0, 0%, 0%);
+  --white-2: hsl(0, 0%, 2%);
+  --orange-yellow-crayola: hsl(45, 100%, 50%); /* Adjusted for contrast */
+  --vegas-gold: hsl(45, 54%, 40%);
+  --light-gray: hsl(0, 0%, 20%); /* Adjusted for dark text */
+  --light-gray-70: hsla(0, 0%, 20%, 0.7);
+  --bittersweet-shimmer: hsl(0, 43%, 51%);
 
+  --shadow-1: -4px 8px 24px hsla(0, 0%, 0%, 0.1);
+  --shadow-2: 0 16px 30px hsla(0, 0%, 0%, 0.1);
+  --shadow-3: 0 16px 40px hsla(0, 0%, 0%, 0.1);
+  --shadow-4: 0 25px 50px hsla(0, 0%, 0%, 0.05);
+  --shadow-5: 0 24px 80px hsla(0, 0%, 0%, 0.1);
+}
 
 
 /*-----------------------------------*\
@@ -292,8 +334,29 @@ article.active {
   z-index: -1;
 }
 
+/* Theme Toggle Button */
+.theme-toggle-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: var(--orange-yellow-crayola);
+  color: var(--smoky-black);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  box-shadow: var(--shadow-3);
+  z-index: 10;
+  cursor: pointer;
+  transition: background var(--transition-1), color var(--transition-1);
+}
 
-
+.theme-toggle-btn:hover {
+  background: var(--vegas-gold);
+}
 
 
 /*-----------------------------------*\
@@ -333,7 +396,7 @@ main {
 
 .avatar-box {
   background: var(--bg-gradient-onyx);
-  border-radius: 20px;
+  border-radius: 30px;
 }
 
 .info-content .name {
@@ -467,6 +530,12 @@ main {
   z-index: 5;
 }
 
+body.light-theme .navbar {
+  background: hsla(0, 0%, 90%, 0.75);
+  border: 1px solid var(--jet);
+}
+
+
 .navbar-list {
   display: flex;
   flex-wrap: wrap;
@@ -509,7 +578,7 @@ main {
 
 
 /**
- * #service 
+ * #service
  */
 
 .service { margin-bottom: 35px; }
@@ -557,7 +626,7 @@ main {
 
 
 /**
- * #testimonials 
+ * #testimonials
  */
 
 .testimonials { margin-bottom: 30px; }
@@ -649,6 +718,11 @@ main {
   transition: var(--transition-1);
 }
 
+body.light-theme .overlay {
+  background: hsl(0, 0%, 90%);
+}
+
+
 .overlay.active {
   opacity: 0.8;
   visibility: visible;
@@ -723,7 +797,7 @@ main {
 
 
 /**
- * #clients 
+ * #clients
  */
 
 .clients { margin-bottom: 15px; }
@@ -768,7 +842,7 @@ main {
 
 
 /**
- * education and experience 
+ * education and experience
  */
 
 .timeline { margin-bottom: 30px; }
@@ -831,7 +905,7 @@ main {
 
 
 /**
- * skills 
+ * skills
  */
 
 .skills-title { margin-bottom: 20px; }
@@ -931,6 +1005,9 @@ main {
 }
 
 .select-item button:hover { --eerie-black-2: hsl(240, 2%, 20%); }
+
+body.light-theme .select-item button:hover { --eerie-black-2: hsl(0, 0%, 85%); }
+
 
 .project-list {
   display: grid;
@@ -1141,6 +1218,10 @@ main {
   filter: grayscale(1) invert(1);
 }
 
+body.light-theme .mapbox iframe {
+  filter: grayscale(0) invert(0); /* Adjust filter for light mode */
+}
+
 .contact-form { margin-bottom: 10px; }
 
 .form-title { margin-bottom: 20px; }
@@ -1244,7 +1325,7 @@ textarea.form-input::-webkit-resizer { display: none; }
 
 
   /**
-   * #PORTFOLIO, BLOG 
+   * #PORTFOLIO, BLOG
    */
 
   .project-img,
@@ -1311,6 +1392,14 @@ textarea.form-input::-webkit-resizer { display: none; }
     font-size: 18px;
   }
 
+  /* Theme toggle button adjustment for larger screens */
+  .theme-toggle-btn {
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    font-size: 28px;
+  }
 
 
   /**
@@ -1337,7 +1426,7 @@ textarea.form-input::-webkit-resizer { display: none; }
 
   .sidebar-info { gap: 25px; }
 
-  .avatar-box { border-radius: 30px; }
+  .avatar-box { border-radius: 20px; }
 
   .avatar-box img { width: 120px; }
 
@@ -1638,7 +1727,7 @@ textarea.form-input::-webkit-resizer { display: none; }
     width: max-content;
     margin-left: auto;
   }
-  
+
 }
 
 
@@ -1681,7 +1770,7 @@ textarea.form-input::-webkit-resizer { display: none; }
 
 
   /**
-   * MAIN 
+   * MAIN
    */
 
   main { margin-bottom: 60px; }
@@ -1708,6 +1797,11 @@ textarea.form-input::-webkit-resizer { display: none; }
     border-radius: 0 20px;
     padding: 0 20px;
     box-shadow: none;
+  }
+
+  body.light-theme .navbar {
+    background: hsla(0, 0%, 90%, 0.75);
+    border: 1px solid var(--jet);
   }
 
   .navbar-list {
@@ -1782,7 +1876,18 @@ textarea.form-input::-webkit-resizer { display: none; }
                 inset -1px -1px 0 hsla(0, 0%, 100%, 0.11);
   }
 
+  body.light-theme::-webkit-scrollbar-track { background: var(--smoky-black); }
+  body.light-theme::-webkit-scrollbar-thumb {
+    border: 5px solid var(--smoky-black);
+    background: hsla(0, 0%, 0%, 0.1);
+    box-shadow: inset 1px 1px 0 hsla(0, 0%, 0%, 0.11),
+                inset -1px -1px 0 hsla(0, 0%, 0%, 0.11);
+  }
+
+
   body::-webkit-scrollbar-thumb:hover { background: hsla(0, 0%, 100%, 0.15); }
+  body.light-theme::-webkit-scrollbar-thumb:hover { background: hsla(0, 0%, 0%, 0.15); }
+
 
   body::-webkit-scrollbar-button { height: 60px; }
 
@@ -1835,7 +1940,11 @@ textarea.form-input::-webkit-resizer { display: none; }
 
   .sidebar-info { flex-direction: column; }
 
-  .avatar-box img { width: 150px; }
+/** Here it's   **/
+.avatar-box img {
+  width: 150px;
+  border-radius: 10%;
+}
 
   .info-content .name {
     white-space: nowrap;
@@ -1874,8 +1983,8 @@ textarea.form-input::-webkit-resizer { display: none; }
 
 
   /**
-	 * RESUME
-	 */
+   * RESUME
+   */
 
   .timeline-text { max-width: 700px; }
 
